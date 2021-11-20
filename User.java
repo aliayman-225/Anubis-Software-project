@@ -3,13 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package sprint1;
 
 /**
  *
- * @author User
+ * @author ACER
  */
-public class User {
-public String getUsername() {
+public abstract class User {
+   private String username,mobileNumber,email,password; 
+   
+   public User(String username,String mobileNumber,String email,String password)
+   {
+       this.username = username;
+       this.mobileNumber = mobileNumber;
+       this.email = email;
+       this.password = password;
+   }
+
+   
+    public String getUsername() {
         return username;
     }
 
@@ -40,14 +52,6 @@ public String getUsername() {
     public void setPassword(String password) {
         this.password = password;
     }
-   private String username,mobileNumber,email,password; 
    
-   public User(String username,String mobileNumber,String email,String password)
-   {
-       this.username = username;
-       this.mobileNumber = mobileNumber;
-       this.email = email;
-       this.password = password;
-   }
     
 }
