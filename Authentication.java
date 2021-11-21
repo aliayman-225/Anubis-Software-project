@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 /**
  *
- * @author User
+ * @author Ali
  */
 public class Authentication {
 
@@ -46,12 +46,11 @@ public class Authentication {
         return instance;
     }
 
-    public User login(String username, String password, UserType type) {
-        if (type == UserType.PASSENGER) {
+    public User login(User user) {
+        if (user.getClass().getName().equals("Passenger")) {
             for (int i = 0; i < passengers.size(); i++) {
-                if ((passengers.get(i).getUsername().equals(username)) && (passengers.get(i).getPassword().equals(password))) {
-                    System.out.println("Correct user name");
-                    System.out.println("correct password");
+                if ((passengers.get(i).getUsername().equals(user.getUsername())) && (passengers.get(i).getPassword().equals(user.getPassword()))) {
+                    System.out.println("====== Welcome " + passengers.get(i).getUsername() + " ======");
                     if (passengers.get(i).isSuspendedAccount()) {
                         System.out.println("This account suspended by the admin");
                         return null;
@@ -60,15 +59,15 @@ public class Authentication {
                 }
             }
             System.out.println("Incorrect username or password");
-        } else if (type == UserType.DRIVER) {
+        } else if (user.getClass().getName().equals("Driver")) {
             for (int i = 0; i < drivers.size(); i++) {
-                if ((drivers.get(i).getUsername().equals(username)) && (drivers.get(i).getPassword().equals(password))) {
-                    System.out.println("Correct user name");
-                    System.out.println("correct password");
+                if ((drivers.get(i).getUsername().equals(user.getUsername())) && (drivers.get(i).getPassword().equals(user.getPassword()))) {
+
                     if (drivers.get(i).isSuspendedAccount()) {
                         System.out.println("This account not verified yet by the admin");
                         return null;
                     }
+                    System.out.println("====== Welcome  captain " + drivers.get(i).getUsername() + " ======");
                     return drivers.get(i);
                 }
             }
@@ -77,34 +76,24 @@ public class Authentication {
         return null;
     }
 
-    public boolean SignUp(String username, String email, String password, String mobileNumber, UserType type) {
+    public boolean SignUp(User user) {
         while (true) {
             for (int i = 0; i < passengers.size(); i++) {
-                if (username.equals(passengers.get(i).getUsername())) {
+                if (user.getUsername().equals(passengers.get(i).getUsername())) {
                     return false;
                 }
-
             }
             for (int i = 0; i < drivers.size(); i++) {
-                if (username.equals(drivers.get(i).getUsername())) {
-                    System.out.println(drivers.get(i).getUsername()+" : "+username);
+                if (user.getUsername().equals(drivers.get(i).getUsername())) {
                     return false;
                 }
-
             }
-            if (type == UserType.PASSENGER) {
-
-                Passenger onthefly = new Passenger(username, mobileNumber, email, password);
-                passengers.add(onthefly);
+            if (user.getClass().getName().equals("Passenger")) {
+                passengers.add((Passenger) user);
                 break;
 
-            } else if (type == UserType.DRIVER) {
-                System.out.println("Enter Driver Licsense number");
-                String driverLiscenseNumber = input.nextLine();
-                System.out.println("Enter National ID");
-                String nationalID = input.nextLine();
-                Driver onthefly = new Driver(username, mobileNumber, email, password, driverLiscenseNumber, nationalID);
-                drivers.add(onthefly);
+            } else if (user.getClass().getName().equals("Driver")) {
+                drivers.add((Driver) user);
                 break;
             }
 
