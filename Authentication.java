@@ -32,13 +32,11 @@ public class Authentication {
     private ArrayList<Driver> drivers;
     private ArrayList<Passenger> passengers;
     private static Authentication instance;
-    private Admin admin;
     Scanner input = new Scanner(System.in);
 
     private Authentication() {
         drivers = new ArrayList<Driver>();
         passengers = new ArrayList<Passenger>();
-        admin = new Admin(this);
     }
 
     public static Authentication getAuthentication() {
