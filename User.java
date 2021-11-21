@@ -41,13 +41,24 @@ public String getUsername() {
         this.password = password;
     }
    private String username,mobileNumber,email,password; 
-   
-   public User(String username,String mobileNumber,String email,String password)
+   private UserType type;
+
+    public boolean isSuspendedAccount() {
+        return suspendedAccount;
+    }
+
+    public void setSuspendedAccount(boolean suspendedAccount) {
+        this.suspendedAccount = suspendedAccount;
+    }
+   private boolean suspendedAccount=false;
+   public User(String username,String mobileNumber,String email,String password, UserType type)
    {
        this.username = username;
        this.mobileNumber = mobileNumber;
        this.email = email;
        this.password = password;
+       this.type=type;
+       suspendedAccount = type==UserType.DRIVER;
    }
     
 }
