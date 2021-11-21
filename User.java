@@ -8,7 +8,7 @@
  *
  * @author User
  */
-public class User {
+public abstract class  User {
 public String getUsername() {
         return username;
     }
@@ -41,7 +41,6 @@ public String getUsername() {
         this.password = password;
     }
    private String username,mobileNumber,email,password; 
-   private UserType type;
 
     public boolean isSuspendedAccount() {
         return suspendedAccount;
@@ -51,14 +50,13 @@ public String getUsername() {
         this.suspendedAccount = suspendedAccount;
     }
    private boolean suspendedAccount=false;
-   public User(String username,String mobileNumber,String email,String password, UserType type)
+   public User(String username,String mobileNumber,String email,String password)
    {
        this.username = username;
        this.mobileNumber = mobileNumber;
        this.email = email;
        this.password = password;
-       this.type=type;
-       suspendedAccount = type==UserType.DRIVER;
+       suspendedAccount = this.getClass().getName().equals("Driver");
    }
     
 }
