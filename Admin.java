@@ -15,7 +15,6 @@ public class Admin {
     Scanner input = new Scanner(System.in);
     Authentication authentication;
 
-    public static ArrayList<Driver> pendingDrivers = new ArrayList <Driver>();
     
     public Admin(Authentication authentication) {
         this.authentication=authentication;
@@ -93,6 +92,7 @@ public class Admin {
     
     
     public ArrayList<Driver> listAllPendingDrivers(){
+        ArrayList<Driver> pendingDrivers = new ArrayList <Driver>();
         for(int i =0;i<authentication.getDrivers().size();i++)
         {
             if(authentication.getDrivers().get(i).isSuspendedAccount())
