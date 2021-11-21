@@ -3,24 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package sw.project;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  *
- * @author ACER
+ * @author dell
  */
 public class Admin {
     Scanner input = new Scanner(System.in);
     Authentication authentication;
+    
 
+    public static ArrayList<Driver> pendingDrivers = new ArrayList <Driver>();
     
     public Admin(Authentication authentication) {
         this.authentication=authentication;
     }
     
+    public void verifyAccount( Driver D){
+     D.setSuspendedAccount(false);
     
+    }
         public boolean activate(String username){
         for(int i=0;i<authentication.getDrivers().size();i++){
             if( (authentication.getDrivers().get(i).getUsername().equals(username))){
@@ -90,9 +96,7 @@ public class Admin {
         return false;
     }
     
-    
     public ArrayList<Driver> listAllPendingDrivers(){
-        ArrayList<Driver> pendingDrivers = new ArrayList <Driver>();
         for(int i =0;i<authentication.getDrivers().size();i++)
         {
             if(authentication.getDrivers().get(i).isSuspendedAccount())
@@ -101,5 +105,4 @@ public class Admin {
         return pendingDrivers;
     }
     
-
 }
