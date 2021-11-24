@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 /**
  *
  * @author Ali
@@ -27,10 +20,11 @@ public class Admin {
                     authentication.getDrivers().get(i).setSuspendedAccount(false);
                     System.out.println("Activated");
                     return true;
-                } else {
+                } 
+                else {
                     System.out.println("Already activated");
                     return true;
-                }
+                    }
             }
         }
         for (int i = 0; i < authentication.getPassengers().size(); i++) {
@@ -48,7 +42,7 @@ public class Admin {
         }
         return false;
     }
-
+    
     public boolean suspend(String username) {
         for (int i = 0; i < authentication.getDrivers().size(); i++) {
             if ((authentication.getDrivers().get(i).getUsername().equals(username))) {
